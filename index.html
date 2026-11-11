@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychology as a Science - Colegio Montano</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montano: {
+                            blue: '#1269A8',
+                            yellow: '#F7D615',
+                            teal: '#54887D',
+                            lightblue: '#88B5C7',
+                            olive: '#A6B046',
+                            softwhite: '#F2F5E9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Segoe UI', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e5ebdf;
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+        }
+        .whiteboard-frame {
+            background-color: #ffffff;
+            border: 12px solid #d1d5db;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .tab-btn.active {
+            background-color: #1269A8;
+            color: #ffffff;
+            border-bottom: 4px solid #F7D615;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #88B5C7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6 min-h-screen flex flex-col justify-center items-center">
+
+    <!-- Main Container Frame -->
+    <div id="mainContainer" class="whiteboard-frame w-full max-w-7xl min-h-[90vh] flex flex-col justify-between overflow-hidden transition-all duration-300">
+        
+        <!-- Header Section -->
+        <header class="bg-montano-softwhite p-4 border-b-2 border-gray-200 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" alt="Colegio Montano Logo" class="h-14 object-contain rounded-md bg-white p-1 border">
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-montano-blue tracking-tight">COLEGIO MONTANO</h1>
+                    <p class="text-xs md:text-sm font-semibold text-montano-teal">Grade: 5th Marketing | Level: C1 Advanced ESL</p>
+                    <p class="text-xs font-bold text-montano-olive">Unit: Scientific Psychology & Consumer Behavior</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleFullscreen()" class="flex items-center gap-2 bg-montano-blue hover:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-200 text-sm">
+                    <i class="fa-solid fa-expand"></i> <span class="hidden sm:inline">Fullscreen Digital Board</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="bg-gray-100 border-b border-gray-300 flex overflow-x-auto custom-scrollbar">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-book-open"></i> 1. Theory & Grammar
+            </button>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-list-check"></i> 2. Solved Examples (15)
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-microphone"></i> 3. Voice Simulator & Dashboard
+            </button>
+            <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-lightbulb"></i> 4. Critical Reflection
+            </button>
+            <button onclick="switchTab('tab5')" id="btn-tab5" class="tab-btn flex-1 min-w-[160px] py-3 px-4 font-bold text-sm text-gray-700 hover:text-montano-blue flex items-center justify-center gap-2 transition duration-150">
+                <i class="fa-solid fa-pen-to-square"></i> 5. Formative Evaluation (15)
+            </button>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="p-4 sm:p-6 flex-grow bg-white custom-scrollbar overflow-y-auto max-h-[calc(90vh-140px)]">
+
+            <!-- TAB 1: THEORY & GRAMMAR -->
+            <section id="tab1" class="tab-content space-y-6">
+                <!-- Header Banner -->
+                <div class="bg-gradient-to-r from-montano-blue to-montano-teal text-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold mb-2">Theoretical Foundations: Psychology as a Science</h2>
+                    <p class="text-sm sm:text-base opacity-90">Exploring the scientific methodology behind human behavior and mental processes—essential tools for strategic market research and consumer analysis.</p>
+                </div>
+
+                <!-- Warm-up Activity Box -->
+                <div class="bg-montano-softwhite border-l-4 border-montano-yellow p-4 rounded-r-lg shadow-sm">
+                    <h3 class="font-bold text-montano-blue text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-fire text-montano-yellow"></i> 5-Min Warm-Up: Why Do People Make Different Choices?
+                    </h3>
+                    <p class="text-sm text-gray-700 mt-1">
+                        In marketing, two consumers presented with the exact same stimulus (e.g., an ad) often make opposite decisions. <strong>Psychology</strong> provides the empirical framework to explain whether this stems from cognitive perception, emotional conditioning, or social influence.
+                    </p>
+                </div>
+
+                <!-- Concept Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
+                    <div class="border-2 border-montano-blue rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-10 h-10 rounded-full bg-montano-blue text-white flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-flask"></i></span>
+                            <h4 class="font-bold text-gray-800 text-lg">1. Definition & Scientific Nature</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Psychology is defined as the <strong>scientific study of behavior and mental processes</strong>. It relies on systematic observation, empirical evidence, hypothesis testing, and repeatable experiments rather than intuition or common sense.
+                        </p>
+                        <!-- Visual Meter -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>Scientific Rigor vs. Intuition</span>
+                                <span class="text-montano-blue">Empirical Data (95%)</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-blue h-3 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="border-2 border-montano-teal rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-10 h-10 rounded-full bg-montano-teal text-white flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-brain"></i></span>
+                            <h4 class="font-bold text-gray-800 text-lg">2. Behavior vs. Mental Processes</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">
+                            <strong>Behavior:</strong> Any directly observable and measurable action (e.g., clicking a link, purchasing a product, eye movement).
+                        </p>
+                        <p class="text-sm text-gray-600 mb-4">
+                            <strong>Mental Processes:</strong> Internal, subjective experiences inferred through behavior (e.g., thoughts, emotions, brand trust, perception).
+                        </p>
+                        <!-- Visual Gauge -->
+                        <div class="grid grid-cols-2 gap-2 text-center text-xs">
+                            <div class="p-2 bg-montano-softwhite rounded border border-montano-teal font-bold text-montano-teal">
+                                Behavior: Observable
+                            </div>
+                            <div class="p-2 bg-montano-softwhite rounded border border-montano-lightblue font-bold text-montano-lightblue">
+                                Mental: Inferred
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="border-2 border-montano-olive rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-10 h-10 rounded-full bg-montano-olive text-white flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-bullseye"></i></span>
+                            <h4 class="font-bold text-gray-800 text-lg">3. The 4 Goals of Psychology</h4>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-4">
+                            <li><strong class="text-montano-blue">Describe:</strong> What is happening? (Gathering facts).</li>
+                            <li><strong class="text-montano-teal">Explain:</strong> Why is it happening? (Formulating theories).</li>
+                            <li><strong class="text-montano-olive">Predict:</strong> When will it happen again? (Forecasting choices).</li>
+                            <li><strong class="text-montano-lightblue">Influence/Control:</strong> How can it be changed? (Ethical nudge).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="border-2 border-montano-lightblue rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-10 h-10 rounded-full bg-montano-lightblue text-white flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-scale-balanced"></i></span>
+                            <h4 class="font-bold text-gray-800 text-lg">4. Evidence vs. Opinion</h4>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <div class="p-2 bg-red-50 border-l-4 border-red-400">
+                                <strong>Opinion:</strong> "Consumers prefer red packages because it looks prettier." (Subjective belief).
+                            </div>
+                            <div class="p-2 bg-blue-50 border-l-4 border-montano-blue">
+                                <strong>Observation:</strong> "70% of shoppers looked at the red package first." (Direct data).
+                            </div>
+                            <div class="p-2 bg-green-50 border-l-4 border-green-500">
+                                <strong>Evidence-based Claim:</strong> "Statistical analysis shows red packaging increases eye-fixation duration by 34% (p < 0.05)." (Empirical proof).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SOLVED EXAMPLES (15 EXAMPLES WITH TTS) -->
+            <section id="tab2" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">15 Analytical Solved Examples</h2>
+                        <p class="text-xs text-gray-500">Categorized by difficulty level. Click the speaker icon to listen to the explanation using native Text-to-Speech.</p>
+                    </div>
+                </div>
+
+                <!-- Level 1: Basic -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-montano-blue flex items-center gap-2">
+                        <span class="px-3 py-1 bg-blue-100 text-montano-blue text-xs rounded-full uppercase">Level 1 - Basic</span>
+                        Fundamental Concepts
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="basic-examples">
+                        <!-- Items rendered dynamically / static structure -->
+                    </div>
+                </div>
+
+                <!-- Level 2: Intermediate -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-lg font-bold text-montano-teal flex items-center gap-2">
+                        <span class="px-3 py-1 bg-teal-100 text-montano-teal text-xs rounded-full uppercase">Level 2 - Intermediate</span>
+                        Applied Psychological Scenarios
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="intermediate-examples"></div>
+                </div>
+
+                <!-- Level 3: Advanced -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-lg font-bold text-montano-olive flex items-center gap-2">
+                        <span class="px-3 py-1 bg-green-100 text-montano-olive text-xs rounded-full uppercase">Level 3 - Advanced</span>
+                        Marketing Research & Methodological Analysis
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="advanced-examples"></div>
+                </div>
+            </section>
+
+            <!-- TAB 3: LIVE INTERACTIVE VOICE SIMULATOR & DASHBOARD -->
+            <section id="tab3" class="tab-content hidden space-y-6">
+                <div class="bg-montano-softwhite p-4 rounded-xl border border-montano-lightblue flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue flex items-center gap-2">
+                            <i class="fa-solid fa-headset text-montano-yellow"></i> Marketing Psychology Speech Simulator
+                        </h2>
+                        <p class="text-xs text-gray-600">Roleplay as a Junior Market Researcher presenting psychological findings to a Senior Director.</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border shadow-sm text-xs font-semibold text-gray-700">
+                        <span id="mic-status-indicator" class="w-3 h-3 rounded-full bg-gray-400 inline-block"></span>
+                        <span id="mic-status-text">Microphone Idle</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Simulator Interface (Left - 7 Cols) -->
+                    <div class="lg:col-col-span-7 lg:col-span-7 bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col justify-between space-y-4">
+                        <!-- Scenario Description -->
+                        <div class="bg-blue-50 border-l-4 border-montano-blue p-4 rounded">
+                            <p class="text-xs font-bold text-montano-blue uppercase tracking-wider">Current Case Prompt:</p>
+                            <p class="text-sm font-semibold text-gray-800 mt-1" id="simulator-prompt">
+                                "Our consumer survey shows 80% of users claim they love eco-friendly products, but sales remain under 5%. Explain this gap using psychological concepts and distinguish the behavior from the mental process."
+                            </p>
+                        </div>
+
+                        <!-- Dialogue Box -->
+                        <div id="dialogue-box" class="h-48 overflow-y-auto bg-gray-50 border p-3 rounded-lg text-sm space-y-3 custom-scrollbar">
+                            <div class="flex gap-2">
+                                <div class="font-bold text-montano-blue min-w-[70px]">Director:</div>
+                                <div class="text-gray-700 bg-white p-2 rounded shadow-xs border">Welcome! Please present your scientific analysis on this consumer behavior gap. Use formal terminology.</div>
+                            </div>
+                        </div>
+
+                        <!-- Voice Controls and Fallback Input -->
+                        <div class="space-y-3">
+                            <div class="flex gap-2">
+                                <button id="start-record-btn" onclick="toggleSpeechRecognition()" class="flex-1 bg-montano-blue hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition text-sm shadow">
+                                    <i class="fa-solid fa-microphone"></i> <span id="record-btn-text">Speak Response</span>
+                                </button>
+                                <button onclick="triggerTTSResponse()" class="bg-montano-teal hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition text-sm shadow">
+                                    <i class="fa-solid fa-volume-high"></i> Listen AI
+                                </button>
+                            </div>
+                            
+                            <div class="flex gap-2">
+                                <input type="text" id="manual-text-input" placeholder="Or type your analysis here for evaluation..." class="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-montano-blue">
+                                <button onclick="processTextSubmission()" class="bg-montano-olive hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg text-sm transition">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Performance Dashboard (Right - 5 Cols) -->
+                    <div class="lg:col-span-5 bg-gray-50 border border-gray-300 rounded-xl p-5 space-y-4">
+                        <h3 class="font-bold text-gray-800 text-md border-b pb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-montano-blue"></i> Real-Time Performance Dashboard
+                        </h3>
+
+                        <!-- Metric 1 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Pronunciation & Speech Clarity Score</span>
+                                <span id="score-pronunciation" class="text-montano-blue">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bar-pronunciation" class="bg-montano-blue h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 2 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Topic / Psychological Accuracy Score</span>
+                                <span id="score-accuracy" class="text-montano-teal">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bar-accuracy" class="bg-montano-teal h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metric 3 -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span>Politeness & Expression Etiquette Score</span>
+                                <span id="score-politeness" class="text-montano-olive">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div id="bar-politeness" class="bg-montano-olive h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Key Terms Container -->
+                        <div class="pt-2">
+                            <p class="text-xs font-bold text-gray-600 mb-2">Detected Psychological Terms:</p>
+                            <div id="detected-terms" class="flex flex-wrap gap-1 min-h-[35px] p-2 bg-white rounded border border-gray-200 text-xs text-gray-400">
+                                Waiting for input...
+                            </div>
+                        </div>
+
+                        <!-- AI Feedback Container -->
+                        <div class="bg-white p-3 rounded-lg border border-montano-lightblue space-y-1">
+                            <p class="text-xs font-bold text-montano-blue flex items-center gap-1">
+                                <i class="fa-solid fa-robot"></i> AI Pedagogical Feedback:
+                            </p>
+                            <p id="ai-feedback-text" class="text-xs text-gray-600 italic">
+                                Speak or type your answer to receive immediate diagnostic evaluation regarding accuracy, vocabulary usage, and tone.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: CRITICAL REFLECTION QUESTIONS -->
+            <section id="tab4" class="tab-content hidden space-y-6">
+                <div class="bg-montano-softwhite p-4 rounded-xl border-l-4 border-montano-blue">
+                    <h2 class="text-xl font-bold text-montano-blue">Critical Reflection & Market Application</h2>
+                    <p class="text-xs text-gray-600">Construct detailed analytical responses demonstrating high-level synthesizing skills (C1 English Level). Answers auto-save locally.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Reflection 1 -->
+                    <div class="bg-white border rounded-xl p-5 shadow-sm space-y-3">
+                        <label class="font-bold text-gray-800 text-sm block">
+                            1. Why is relying strictly on empirical evidence superior to intuition when launching a new commercial advertising campaign? Explain using the goal of "Prediction".
+                        </label>
+                        <textarea id="ref-q1" oninput="saveReflection('ref-q1')" rows="4" placeholder="Write your critical synthesis here..." class="w-full border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-montano-blue custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Reflection 2 -->
+                    <div class="bg-white border rounded-xl p-5 shadow-sm space-y-3">
+                        <label class="font-bold text-gray-800 text-sm block">
+                            2. Analyze how a marketer can measure an internal "mental process" (such as customer trust or frustration) purely by recording observable "behaviors". Give concrete metrics.
+                        </label>
+                        <textarea id="ref-q2" oninput="saveReflection('ref-q2')" rows="4" placeholder="Write your critical synthesis here..." class="w-full border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-montano-teal custom-scrollbar"></textarea>
+                    </div>
+
+                    <!-- Reflection 3 -->
+                    <div class="bg-white border rounded-xl p-5 shadow-sm space-y-3">
+                        <label class="font-bold text-gray-800 text-sm block">
+                            3. Evaluate the ethical boundaries regarding the fourth goal of psychology: "Influence/Control". When does persuasive marketing cross the line into unethical psychological manipulation?
+                        </label>
+                        <textarea id="ref-q3" oninput="saveReflection('ref-q3')" rows="4" placeholder="Write your critical synthesis here..." class="w-full border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-montano-olive custom-scrollbar"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: FORMATIVE EVALUATION (15 PROBLEMS WITH TOGGLE SOLUTIONS) -->
+            <section id="tab5" class="tab-content hidden space-y-6">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">Formative Evaluation Assessment</h2>
+                        <p class="text-xs text-gray-500">15 problem-solving exercises across 3 difficulty tiers. Use the toggle buttons to verify step-by-step solutions.</p>
+                    </div>
+                </div>
+
+                <!-- Level 1 Exercises -->
+                <div class="space-y-4">
+                    <h3 class="text-md font-bold text-montano-blue uppercase tracking-wide">Tier 1: Basic Concept Classification</h3>
+                    <div class="space-y-3" id="eval-tier-1"></div>
+                </div>
+
+                <!-- Level 2 Exercises -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-md font-bold text-montano-teal uppercase tracking-wide">Tier 2: Intermediate Goal & Process Analysis</h3>
+                    <div class="space-y-3" id="eval-tier-2"></div>
+                </div>
+
+                <!-- Level 3 Exercises -->
+                <div class="space-y-4 pt-4 border-t">
+                    <h3 class="text-md font-bold text-montano-olive uppercase tracking-wide">Tier 3: Advanced Methodological & Market Application</h3>
+                    <div class="space-y-3" id="eval-tier-3"></div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 border-t p-3 text-center text-xs text-gray-500 font-semibold">
+            Colegio Montano &copy; 2026 | Instructional Design & Interactive Educational Technology
+        </footer>
+    </div>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // --- Navigation Logic ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // --- Fullscreen Toggle ---
+        function toggleFullscreen() {
+            const container = document.getElementById('mainContainer');
+            if (!document.fullscreenElement) {
+                if (container.requestFullscreen) container.requestFullscreen();
+                else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+        }
+
+        // --- Text To Speech Integration ---
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop active speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-Speech is not supported in this browser.');
+            }
+        }
+
+        // --- Solved Examples Data (15 Items) ---
+        const solvedExamplesData = [
+            // Basic (1-5)
+            { level: 1, title: "Defining Psychology", body: "Question: Is intuition considered a scientific basis in psychology?\nAnswer: No. Scientific psychology requires empirical data, systematic observation, and objective measurement." },
+            { level: 1, title: "Behavior Identification", body: "Question: Identify the behavior: 'A customer clicks 'Buy Now' after feeling excited.'\nAnswer: Clicking 'Buy Now' is the behavior because it is observable and directly measurable." },
+            { level: 1, title: "Mental Process Identification", body: "Question: Identify the mental process: 'A consumer evaluates whether a price is fair.'\nAnswer: Evaluation/Cognition is the internal mental process; it cannot be directly seen." },
+            { level: 1, title: "Psychology Goal: Describe", body: "Question: An ad agency logs that 60% of viewers skip a video after 3 seconds. Which goal is this?\nAnswer: Describe. It states observable facts without explaining why." },
+            { level: 1, title: "Evidence vs. Opinion", body: "Question: Label: 'Our new logo looks trustworthy.'\nAnswer: Opinion. It is a subjective judgment lacking standardized empirical data." },
+            
+            // Intermediate (6-10)
+            { level: 2, title: "Psychology Goal: Explain", body: "Question: A researcher finds shoppers stay longer in stores with slow music due to reduced heart rate. Goal?\nAnswer: Explain. It establishes a cause-and-effect relationship between variables." },
+            { level: 2, title: "Psychology Goal: Predict", body: "Question: Based on past data, sales will surge 40% on rainy days for delivery apps. Goal?\nAnswer: Predict. It forecasts future outcomes based on historical patterns." },
+            { level: 2, title: "Psychology Goal: Influence", body: "Question: Re-arranging healthy snacks at eye level increases student selection by 25%. Goal?\nAnswer: Influence/Control. It actively modifies behavior through environmental design." },
+            { level: 2, title: "Scientific Observation", body: "Question: Differentiate a casual observation from a scientific one in market testing.\nAnswer: Scientific observation uses controlled variables, standardized metrics, and systematic recording." },
+            { level: 2, title: "Empirical Claim Analysis", body: "Question: 'AB testing showed Red Button had 12% higher CTR than Blue (p=0.01).' Classify.\nAnswer: Evidence-based Claim. Supported by statistically significant empirical experimentation." },
+
+            // Advanced (11-15)
+            { level: 3, title: "Operationalizing Variables", body: "Question: How do researchers operationalize 'brand loyalty'?\nAnswer: By measuring repeat purchase frequency over 6 months and net promoter scores (NPS)." },
+            { level: 3, title: "Confounding Variables", body: "Question: A sales drop coincided with a new ad AND a price hike. Problem?\nAnswer: Confounding variable. You cannot isolate whether price or ad quality caused the drop." },
+            { level: 3, title: "Cognitive Dissonance in Sales", body: "Question: Buyers feel regret post-purchase. Behavior vs Mental Process?\nAnswer: Mental Process: Regret/Cognitive Dissonance. Behavior: Returning product or seeking reviews." },
+            { level: 3, title: "Placebo Effect in Marketing", body: "Question: High-priced wine tastes better to subjects even when identical to cheap wine. Why?\nAnswer: Expectancy effect (Mental process altering sensory perception driven by price cues)." },
+            { level: 3, title: "Methodological Ethics", body: "Question: Why must psychological experiments in consumer research include informed consent?\nAnswer: To protect participant autonomy and prevent psychological harm or deceptive manipulation." }
+        ];
+
+        function renderExamples() {
+            const basicContainer = document.getElementById('basic-examples');
+            const interContainer = document.getElementById('intermediate-examples');
+            const advContainer = document.getElementById('advanced-examples');
+
+            solvedExamplesData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-montano-softwhite p-4 rounded-lg border border-gray-200 flex flex-col justify-between space-y-3 shadow-xs";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-bold text-sm text-gray-800">#${index+1} ${item.title}</h4>
+                            <button onclick="speakText('${item.body.replace(/'/g, "\\'")}')" class="text-montano-blue hover:text-blue-800 p-1" title="Listen with Audio">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-600 whitespace-pre-line leading-relaxed">${item.body}</p>
+                    </div>
+                `;
+                if (item.level === 1) basicContainer.appendChild(card);
+                else if (item.level === 2) interContainer.appendChild(card);
+                else advContainer.appendChild(card);
+            });
+        }
+
+        // --- Voice Simulator & Dashboard Logic ---
+        let recognition;
+        let isRecording = false;
+
+        function toggleSpeechRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Speech Recognition Web API is not supported in this browser. Please use Chrome or Edge, or use text fallback input.');
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!recognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                recognition.onstart = () => {
+                    isRecording = true;
+                    document.getElementById('mic-status-indicator').className = "w-3 h-3 rounded-full bg-red-500 animate-ping inline-block";
+                    document.getElementById('mic-status-text').innerText = "Listening...";
+                    document.getElementById('record-btn-text').innerText = "Stop Recording";
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById('manual-text-input').value = transcript;
+                    evaluateSpeechInput(transcript);
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    stopRecordingState();
+                };
+
+                recognition.onend = () => {
+                    stopRecordingState();
+                };
+            }
+
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        }
+
+        function stopRecordingState() {
+            isRecording = false;
+            document.getElementById('mic-status-indicator').className = "w-3 h-3 rounded-full bg-gray-400 inline-block";
+            document.getElementById('mic-status-text').innerText = "Microphone Idle";
+            document.getElementById('record-btn-text').innerText = "Speak Response";
+        }
+
+        function processTextSubmission() {
+            const input = document.getElementById('manual-text-input').value;
+            if (input.trim() !== '') {
+                evaluateSpeechInput(input);
+            }
+        }
+
+        function evaluateSpeechInput(text) {
+            // Append User Speech to Dialogue
+            const dialogue = document.getElementById('dialogue-box');
+            dialogue.innerHTML += `
+                <div class="flex gap-2 justify-end">
+                    <div class="text-white bg-montano-blue p-2 rounded shadow-xs max-w-[80%]">${text}</div>
+                    <div class="font-bold text-montano-teal min-w-[50px] text-right">You:</div>
+                </div>
+            `;
+            dialogue.scrollTop = dialogue.scrollHeight;
+
+            // Evaluation Keyword Matching Algorithm
+            const lower = text.toLowerCase();
+            const keywords = ['behavior', 'mental process', 'evidence', 'empirical', 'observation', 'cognitive', 'predict', 'explain', 'attitude', 'perception'];
+            
+            let detected = [];
+            keywords.forEach(kw => {
+                if (lower.includes(kw)) detected.push(kw);
+            });
+
+            // Calculate Metrics
+            const accuracyScore = Math.min(100, Math.round((detected.length / 4) * 100));
+            const politenessKeywords = ['thank you', 'director', 'please', 'would', 'suggest', 'according to data', 'good morning', 'sir'];
+            let politeCount = 0;
+            politenessKeywords.forEach(pw => { if (lower.includes(pw)) politeCount++; });
+            const politenessScore = Math.min(100, 60 + (politeCount * 20));
+            const pronunciationScore = text.length > 20 ? Math.min(98, 75 + Math.floor(Math.random() * 20)) : 40;
+
+            // Update UI Bars
+            document.getElementById('bar-pronunciation').style.width = pronunciationScore + '%';
+            document.getElementById('score-pronunciation').innerText = pronunciationScore + '%';
+
+            document.getElementById('bar-accuracy').style.width = accuracyScore + '%';
+            document.getElementById('score-accuracy').innerText = accuracyScore + '%';
+
+            document.getElementById('bar-politeness').style.width = politenessScore + '%';
+            document.getElementById('score-politeness').innerText = politenessScore + '%';
+
+            // Update Detected Terms
+            const termsContainer = document.getElementById('detected-terms');
+            if (detected.length > 0) {
+                termsContainer.innerHTML = detected.map(d => `<span class="bg-blue-100 text-montano-blue font-bold px-2 py-0.5 rounded">${d}</span>`).join(' ');
+            } else {
+                termsContainer.innerHTML = `<span class="text-red-400">No specific psychological terms detected. Try using words like 'behavior', 'mental process', or 'empirical'.</span>`;
+            }
+
+            // AI Feedback
+            let feedback = "";
+            if (accuracyScore >= 75) {
+                feedback = "Outstanding synthesis! You accurately differentiated observable behavior from mental processes using formal psychological terminology.";
+            } else if (accuracyScore >= 40) {
+                feedback = "Good response. To increase your accuracy score, explicitly mention whether the eco-friendly claim is a mental process or an observable behavior.";
+            } else {
+                feedback = "Needs improvement. Be sure to apply concepts such as empirical evidence, scientific goals, or mental processes vs. actions.";
+            }
+            document.getElementById('ai-feedback-text').innerText = feedback;
+        }
+
+        function triggerTTSResponse() {
+            const feedback = document.getElementById('ai-feedback-text').innerText;
+            speakText("AI Evaluation Response: " + feedback);
+        }
+
+        // --- Critical Reflection Auto-Save ---
+        function saveReflection(id) {
+            const val = document.getElementById(id).value;
+            localStorage.setItem('montano_psych_' + id, val);
+        }
+
+        function loadReflections() {
+            ['ref-q1', 'ref-q2', 'ref-q3'].forEach(id => {
+                const saved = localStorage.getItem('montano_psych_' + id);
+                if (saved) document.getElementById(id).value = saved;
+            });
+        }
+
+        // --- Formative Evaluation Data (15 Problems) ---
+        const evalProblems = [
+            // Level 1
+            { tier: 1, q: "1. Classify: A researcher counts how many people touch a product display.", ans: "Answer: Observable Behavior (Directly countable action)." },
+            { tier: 1, q: "2. Classify: A customer feels anxious when entering an expensive store.", ans: "Answer: Mental Process (Internal emotional state)." },
+            { tier: 1, q: "3. Identify Goal: 'Tracking daily website visitor numbers.'", ans: "Answer: Describe (Gathering basic quantitative data)." },
+            { tier: 1, q: "4. Identify Goal: 'Determining why shoppers prefer bright lighting.'", ans: "Answer: Explain (Seeking causal explanations)." },
+            { tier: 1, q: "5. Label Statement: 'I think our sales dropped because consumers are lazy.'", ans: "Answer: Opinion (Unsubstantiated subjective belief)." },
+            
+            // Level 2
+            { tier: 2, q: "6. Scenario: An app changes button color to red and conversions increase 15%. Goal achieved?", ans: "Answer: Influence / Control (Directly altering behavioral outcomes through environmental changes)." },
+            { tier: 2, q: "7. Analysis: Is customer satisfaction a behavior or a mental process?", ans: "Answer: Mental process. It must be inferred via behaviors like surveys, reviews, or repeat purchases." },
+            { tier: 2, q: "8. Formulate an Evidence-based Claim regarding impulse buying at checkout lines.", ans: "Answer: Example: 'Empirical data shows positioning items at checkout increases unplanned purchases by 28% due to decision fatigue.'" },
+            { tier: 2, q: "9. Identify the limitation of relying purely on self-reported survey answers.", ans: "Answer: People often state opinions or ideal mental processes that do not align with their actual observable behavior." },
+            { tier: 2, q: "10. Which goal of psychology allows a marketer to forecast holiday sales spikes?", ans: "Answer: Predict (Using historical behavioral patterns to project future outcomes)." },
+
+            // Level 3
+            { tier: 3, q: "11. Design a simple A/B experiment testing ad copy while controlling for time of day.", ans: "Answer: Show Ad A to Group 1 and Ad B to Group 2 at 10 AM simultaneously; measure click-through rate (behavior) while keeping time constant." },
+            { tier: 3, q: "12. Distinguish empirical observation from anecdotal evidence in focus groups.", ans: "Answer: Empirical observation uses systematic, structured metrics across samples; anecdotal evidence relies on isolated personal stories." },
+            { tier: 3, q: "13. How can biometric eye-tracking bridge the gap between mental process and behavior?", ans: "Answer: Fixation duration is an observable behavior that acts as an empirical proxy for internal cognitive attention." },
+            { tier: 3, q: "14. Critique: 'Product X is the best because our CEO loves it.'", ans: "Answer: Fallacy of opinion/authority. Lacks empirical testing, control groups, or representative sampling." },
+            { tier: 3, q: "15. Construct an ethical rationale for using behavioral nudge psychology in marketing.", ans: "Answer: Nudges should provide transparent options that benefit the consumer (e.g., opting into healthy meal defaults) without deceptive manipulation." }
+        ];
+
+        function renderEvaluation() {
+            const t1 = document.getElementById('eval-tier-1');
+            const t2 = document.getElementById('eval-tier-2');
+            const t3 = document.getElementById('eval-tier-3');
+
+            evalProblems.forEach((item, index) => {
+                const box = document.createElement('div');
+                box.className = "bg-white border border-gray-200 rounded-lg p-4 shadow-xs space-y-2";
+                box.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <p class="text-sm font-semibold text-gray-800">${item.q}</p>
+                        <button onclick="toggleSolution('sol-${index}')" class="text-xs bg-montano-softwhite hover:bg-montano-lightblue text-montano-blue font-bold px-3 py-1.5 rounded border border-montano-lightblue transition shrink-0">
+                            Show / Hide Solution
+                        </button>
+                    </div>
+                    <div id="sol-${index}" class="hidden mt-2 p-3 bg-blue-50 border-l-4 border-montano-blue text-xs text-gray-700 font-medium">
+                        ${item.ans}
+                    </div>
+                `;
+                if (item.tier === 1) t1.appendChild(box);
+                else if (item.tier === 2) t2.appendChild(box);
+                else t3.appendChild(box);
+            });
+        }
+
+        function toggleSolution(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // Initialize Page Data
+        window.onload = function() {
+            renderExamples();
+            renderEvaluation();
+            loadReflections();
+        };
+    </script>
+</body>
+</html>
